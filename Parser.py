@@ -1,29 +1,26 @@
+import os
 class Parser(object):
     def __init__(self, expression):
         self.expression = expression
+        self.variables = []
+        self.grammar = ['*', '(', '+', ')', '!', '|', '^', '~']
+
+    def parse(self):
+        for index in self.expression:
+            if(ord(index) >= 65) and (ord(index) <= 90):
+                index = chr(ord(index) -32)
+            if(ord(index) >= 97) and (ord(index) <= 122):
+                continue
+
+            self.variables.append(index)
+        #reformatting in progress
+        print (self.variables)
 
 
 if __name__ == '__main__':
-    parse = Parser('(a+B)*(B+A)*(!d+E+F)')
-    pairs = []
-    vals = []
-    variables = []
-    for index in parse.expression:
-      #  if(index == '(') or (index == ')') or (index == '*') or (index == '+') or (index == "!"):
-      #      continue
-        if(ord(index) >= 97) or (ord(index) <= 122):
-            index = chr(ord(index) -32)
-        if(ord(index) <= 65) or (ord(index) >= 90):
-            continue
-        variables.append(index)
-    for i in variables:
-        if i not in vals:
-            vals.append(i)
-    for rv in vals:
-        pairs.append((rv, ''))
-    print variables
-    print vals
-    print pairs
+    string = Parser('(a+B)*(B+A)*(!d+E+F)')
+    string.parse()
+
 # parse (A+B)*(B+A)*(!D+E+F)
 # class Object
 # 1 arguement
