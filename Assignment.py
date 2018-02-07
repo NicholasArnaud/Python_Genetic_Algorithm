@@ -9,11 +9,11 @@ if __name__ == '__main__':
     vals = []
     variables = []
     for index in parse.expression:
-      #  if(index == '(') or (index == ')') or (index == '*') or (index == '+') or (index == "!"):
-      #      continue
-        if(ord(index) >= 97) or (ord(index) <= 122):
-            index = chr(ord(index) -32)
-        if(ord(index) <= 65) or (ord(index) >= 90):
+        if(ord(index) >= 65) and (ord(index) <= 90):
+            index = chr(ord(index) + 32)
+        if(ord(index) >= 97) and (ord(index) <= 122):
+            pass
+        else:
             continue
         variables.append(index)
     for i in variables:
