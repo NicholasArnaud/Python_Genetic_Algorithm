@@ -45,8 +45,8 @@ def readfile(filename):
     data_list = file_info.readlines()
     for data in data_list:
         _string = _parser(data)
+        _string.parse()
     file_info.close()
-    _string.parse()
 
 
 if __name__ == '__main__':
