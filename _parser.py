@@ -1,6 +1,8 @@
+'parser for strings to get variables'
 import random
 
-class Parser(object):
+
+class _parser(object):
     "Collects the string and seperates it into seperate strings to variablize"
     def __init__(self, expression):
         self.expression = expression
@@ -12,6 +14,7 @@ class Parser(object):
 
     def parse(self):
         "Parses through list"
+        print self.expression
         self.initvariables()
         for i in self.variables:
             if i not in self.vals:
@@ -35,9 +38,20 @@ class Parser(object):
             self.variables.append(index)
 
 
+
+def readfile(filename):
+    "Runs test cases created from a saved file"
+    file_info = open(filename, 'r')
+    data_list = file_info.readlines()
+    for data in data_list:
+        _string = _parser(data)
+    file_info.close()
+    _string.parse()
+
+
 if __name__ == '__main__':
-    STRING = Parser('(a+B)*(B+A)*(!d+E+F)')
-    STRING.parse()
+    readfile('TestReader.txt')
+
 
 # parse (A+B)*(B+A)*(!D+E+F)
 # class Object
