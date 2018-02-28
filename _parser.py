@@ -3,7 +3,7 @@ import random
 
 
 class _parser(object):
-    "Collects the string and seperates it into seperate strings to variablize"
+    'Collects the string and seperates it into seperate strings to variablize'
     def __init__(self, expression):
         self.expression = expression
         self.variables = []
@@ -13,7 +13,7 @@ class _parser(object):
         self.grammar = ['*', '(', '+', ')', '!', '|', '^', '~']
 
     def parse(self):
-        "Parses through list"
+        'Parses through list'
         print self.expression
         self.initvariables()
         for i in self.variables:
@@ -27,7 +27,7 @@ class _parser(object):
         print self.pairs
 
     def initvariables(self):
-        "creates the variables"
+        'creates the variables'
         for index in self.expression:
             if(ord(index) >= 65) and (ord(index) <= 90):
                 index = chr(ord(index) + 32)
@@ -40,10 +40,12 @@ class _parser(object):
 
 
 def readfile(filename):
-    "Runs test cases created from a saved file"
+    'Runs test cases created from a saved file'
     file_info = open(filename, 'r')
     data_list = file_info.readlines()
     for data in data_list:
+        if data[0] == "\n":
+            continue
         _string = _parser(data)
         _string.parse()
     file_info.close()
