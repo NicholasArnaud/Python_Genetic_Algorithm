@@ -11,6 +11,7 @@ class _parser(object):
         self.pairs = []
         self.value = 0
         self.grammar = ['*', '(', '+', ')', '!', '|', '^', '~', '=', '&']
+        self.correctstatement = False
 
     def parse(self):
         'Parses through list'
@@ -22,13 +23,14 @@ class _parser(object):
             if i not in self.vals:
                 self.vals.append(i)
         for r_p in self.vals:
-            self.value = random.randint(0, 1)
-            self.pairs.append((r_p, str(self.value)))
+            self.pairs.append((r_p, ''))
 
+        self.setvariables('1001')
         savefile(self.expression)
         print self.variables
         print self.vals
         print self.pairs
+
 
     def initvariables(self):
         'creates the variables'
@@ -42,6 +44,13 @@ class _parser(object):
                 continue
             self.variables.append(index)
 
+    def setvariables(self, variable_string):
+        'Updates list of tuples that represent each variables value'
+        for i in range(0, len(self.pairs), 1):
+            new_pair = self.pairs[i]
+            new_pair = (new_pair[0], variable_string[i])
+            self.pairs[i] = new_pair
+
     def setoperations(self, string):
         'sets operations to fit CNF convention'
         for index in string:
@@ -50,6 +59,8 @@ class _parser(object):
                     self.expression = self.expression.replace(index, ' or ')
                 if index == '+':
                     self.expression = self.expression.replace(index, ' and ')
+                if index == '!':
+                    self.expression = self.expression.replace(index, ' not ')
 
 def readfile(filename):
     'Runs test cases created from a saved file'
@@ -62,10 +73,10 @@ def readfile(filename):
         _string.parse()
     file_info.close()
 
-def savefile(string):
+def savefile(_string):
     'save expression from parser'
     file_info = open('SavedInfo.txt', 'a+')
-    file_info.write(string + '\n')
+    file_info.write(_string + '\n')
     file_info.close()
 
 if __name__ == '__main__':

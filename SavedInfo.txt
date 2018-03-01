@@ -1,3 +1,0 @@
-(a and b) or (b and a) or (!d and e and f)
-
-(b and d) or (d or !a) or (f or e and b)
