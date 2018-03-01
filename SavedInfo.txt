@@ -1,3 +1,3 @@
-(a and b) or (b and a) or ( not d and e and f)
+(a and b) or (b and a) or (!d and e and f)
 
-(b and d) or (d not a) or (f or e and b)
+(b and d) or (d or !a) or (f or e and b)

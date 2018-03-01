@@ -24,6 +24,7 @@ class _parser(object):
         for r_p in self.vals:
             self.value = random.randint(0, 1)
             self.pairs.append((r_p, str(self.value)))
+
         savefile(self.expression)
         print self.variables
         print self.vals
@@ -49,8 +50,6 @@ class _parser(object):
                     self.expression = self.expression.replace(index, ' or ')
                 if index == '+':
                     self.expression = self.expression.replace(index, ' and ')
-                if index == '!':
-                    self.expression = self.expression.replace(index, ' not ')
 
 def readfile(filename):
     'Runs test cases created from a saved file'
