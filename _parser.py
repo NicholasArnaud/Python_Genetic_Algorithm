@@ -6,6 +6,7 @@ class _parser(object):
     'Collects the string and seperates it into seperate strings to variablize'
     def __init__(self, expression):
         self.expression = expression
+        self.exprwithvalues = ''
         self.variables = []
         self.vals = []
         self.pairs = []
@@ -17,7 +18,7 @@ class _parser(object):
         'Parses through list'
         print self.expression
         self.initvariables()
-        self.setoperations(self.expression)
+
         print self.expression
         for i in self.variables:
             if i not in self.vals:
@@ -25,8 +26,10 @@ class _parser(object):
         for r_p in self.vals:
             self.pairs.append((r_p, ''))
 
-        self.setvariables('1001')
-        savefile(self.expression)
+        self.setvariables('100110')
+        self.setoperations(self.exprwithvalues)
+        savefile(self.exprwithvalues)
+        trueexpression = bool(eval(self.exprwithvalues))
         print self.variables
         print self.vals
         print self.pairs
@@ -50,17 +53,26 @@ class _parser(object):
             new_pair = self.pairs[i]
             new_pair = (new_pair[0], variable_string[i])
             self.pairs[i] = new_pair
+        print self.pairs
+        for char in self.expression:
+            if (ord(char) >= 97) and (ord(char) <= 122):
+                for var in self.pairs:
+                    if char is var[0]:
+                        self.exprwithvalues += var[1]
+            else:
+                self.exprwithvalues += char
+        print self.exprwithvalues
 
     def setoperations(self, string):
         'sets operations to fit CNF convention'
         for index in string:
             if index in self.grammar:
                 if index == '*':
-                    self.expression = self.expression.replace(index, ' or ')
+                    self.exprwithvalues = self.exprwithvalues.replace(index, ' or ')
                 if index == '+':
-                    self.expression = self.expression.replace(index, ' and ')
+                    self.exprwithvalues = self.exprwithvalues.replace(index, ' and ')
                 if index == '!':
-                    self.expression = self.expression.replace(index, ' not ')
+                    self.exprwithvalues = self.exprwithvalues.replace(index, ' not ')
 
 def readfile(filename):
     'Runs test cases created from a saved file'
