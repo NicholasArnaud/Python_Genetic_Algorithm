@@ -9,7 +9,8 @@ class Algorithm(object):
         self.expression = ''
         self.valuesetlist = []
         self.correctnessvalue = 0
-        self.curtestexpr = '11111'
+        self.numcounter = 0
+        self.curtestexpr = '11111111111111'
         self.expressioncheck = False
 
 
@@ -22,6 +23,7 @@ class Algorithm(object):
             if repeatcount < len(self.valuesetlist):
                 self.algorithminitparse(self.valuesetlist[repeatcount])
                 repeatcount += 1
+                print generation
             else:
                 generation += 1
                 repeatcount = 0
@@ -57,8 +59,34 @@ class Algorithm(object):
                             bestvalues.append(x)
 
                 self.valuesetlist = []
-                self.valuesetlist.append(bestvalues[0])
-                self.valuesetlist.append(bestvalues[1])
+                halfwaypoint = self.numcounter/2
+                anotherindex = 0
+                P1Head = ''
+                P2Head = ''
+                while anotherindex < int(self.numcounter):
+                    if anotherindex < halfwaypoint:
+                        bv = bestvalues[0]
+                        bvexpression = bv[0]
+                        P1Head += bvexpression[anotherindex]
+                        anotherindex += 1
+
+                    if anotherindex >= halfwaypoint:
+                        bv = bestvalues[1]
+                        bvexpression = bv[0]
+                        P2Head += bvexpression[anotherindex]
+                        anotherindex += 1
+                tempindex = halfwaypoint
+                while tempindex < int(self.numcounter):
+                    bv = bestvalues[0]
+                    bvexpression = bv[0]
+                    bv2 = bestvalues[1]
+                    bv2expression = bv2[0]
+                    P1Head += bv2expression[tempindex]
+                    P2Head += bvexpression[tempindex]
+                    tempindex += 1
+
+                self.valuesetlist.append(P1Head)
+                self.valuesetlist.append(P2Head)
                 self.initrandomvalues()
 
     def algorithminitparse(self, valueset):
@@ -75,11 +103,11 @@ class Algorithm(object):
 
     def initrandomvalues(self):
         'sets up a list of 0s and 1s'
-        while len(self.valuesetlist) < 10:
-            numcounter = 0
+        while len(self.valuesetlist) < 26:
+            self.numcounter = 0
             randlist = ''
-            while numcounter <= 10:
-                numcounter += 1
+            while self.numcounter < 10:
+                self.numcounter += 1
                 randlist += str(random.randint(0, 1))
             valueset = randlist
             self.valuesetlist.append(valueset)

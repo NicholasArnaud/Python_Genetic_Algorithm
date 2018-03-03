@@ -2,4 +2,4 @@
 (b*d)+(d*!A)+(f*e+b)
 (!a*b*a)+(c*d)
 (!a*b*a)+(c*!c)
-(a+b+c)+(d+e)+(a+c)
+(a+b+c)+(d+e)+(f+g)+(h+i+j)+(k+l)+(m+n)
