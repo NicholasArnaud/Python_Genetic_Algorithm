@@ -4,13 +4,13 @@ import random
 
 class Algorithm(object):
     'genetic algorithm'
-    def __init__(self, parser):
+    def __init__(self, parser, expectedvalues):
         self.parserclass = parser
         self.expression = ''
         self.valuesetlist = []
         self.correctnessvalue = 0
         self.numcounter = 0
-        self.curtestexpr = '11111111111111'
+        self.curtestexpr = expectedvalues
         self.expressioncheck = False
 
 
@@ -23,7 +23,7 @@ class Algorithm(object):
             if repeatcount < len(self.valuesetlist):
                 self.algorithminitparse(self.valuesetlist[repeatcount])
                 repeatcount += 1
-                print generation
+                print 'Generation: ' + str(generation)
             else:
                 generation += 1
                 repeatcount = 0
@@ -88,6 +88,8 @@ class Algorithm(object):
                 self.valuesetlist.append(P1Head)
                 self.valuesetlist.append(P2Head)
                 self.initrandomvalues()
+        
+        _parser.savefile(self.expression + ' equals: '+ str(self.expressioncheck) + ' at Generation: '+ str(generation))
 
     def algorithminitparse(self, valueset):
         'Initial parse setup for algorithm'
@@ -106,7 +108,7 @@ class Algorithm(object):
         while len(self.valuesetlist) < 26:
             self.numcounter = 0
             randlist = ''
-            while self.numcounter < 10:
+            while self.numcounter < 26:
                 self.numcounter += 1
                 randlist += str(random.randint(0, 1))
             valueset = randlist
@@ -115,5 +117,7 @@ class Algorithm(object):
 
 if __name__ == '__main__':
     print 'test'
-    ALGO = Algorithm(_parser.seperatedata(True, 4, _parser.readfile('TestReader.txt')))
+    #Algorithm set to test line #4 (is actually reading line 5) expression only for all true with values equaling to 1
+    #Can find expression examples in the 'TestReader.txt' file
+    ALGO = Algorithm(_parser.seperatedata(True, 4, _parser.readfile('TestReader.txt')), '11111111111111')
     ALGO.run()
