@@ -1,3 +1,5 @@
-(a+B)*(B+A)*(!d+E+F)
-
-(b+d)*(d*!A)*(f*e+b)
+(a+B)+(B*A)+(d*E*F)
+(b*d)+(d*!A)+(f*e+b)
+(!a*b*a)+(c*d)
+(!a*b*a)+(c*!c)
+(a+b+c)+(d+e)+(a+c)
