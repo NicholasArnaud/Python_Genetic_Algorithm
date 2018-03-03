@@ -1,9 +1,1 @@
-(a and b) or (b and a) or ( not d and e and f)
-
-(b and d) or (d or  not a) or (f or e and b)
-(1+0)*(0+1)*(!0+1+1)
-
-(1 and 0) or (0 and 1) or ( not 0 and 1 and 1)
-
-(1 and 0) or (0 and 1) or ( not 0 and 1 and 1)
 
